@@ -1,0 +1,5 @@
+rosie/arm/gains_package: "hebi_rosie_demo"
+rosie/arm/gains_file: "gains/rosie_arm_gains.xml"
+rosie/arm/hrdf_package: "hebi_rosie_demo"
+rosie/arm/hrdf_file: "hrdf/rosie_arm.hrdf"
+rosie/arm/home_position: [ 0.01, 2.09439, 2.09439, 0.01, 1.5707963, 0.01 ]

@@ -1,0 +1,4 @@
+rosie/arm/names: [ "Base", "Shoulder", "Elbow", "Wrist1", "Wrist2", "Wrist3" ]
+rosie/arm/families: [ "Rosie" ]
+rosie/base/names: [ "_Wheel1", "_Wheel2", "_Wheel3" ]
+rosie/base/families: [ "Rosie" ]
