@@ -89,11 +89,11 @@ add_executable(gripper_node src/gripper_node.cpp)
 add_dependencies(gripper_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(gripper_node ${catkin_LIBRARIES})
 
-add_executable(vision_process src/Rosie_Demo/vision_process.cpp)
+add_executable(vision_process src/vision_process.cpp)
 add_dependencies(vision_process ${catkin_EXPORTED_TARGETS})
 target_link_libraries(vision_process ${catkin_LIBRARIES} ${OpenCV_LIBS})
 
-add_executable(vision_threshold src/Rosie_Demo/vision_threshold.cpp)
+add_executable(vision_threshold src/vision_threshold.cpp)
 add_dependencies(vision_threshold ${catkin_EXPORTED_TARGETS})
 target_link_libraries(vision_threshold ${catkin_LIBRARIES} ${OpenCV_LIBS})
 
