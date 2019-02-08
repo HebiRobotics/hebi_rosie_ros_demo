@@ -71,6 +71,9 @@ cd src
 git clone https://github.com/HebiRobotics/hebi_cpp_api_ros
 git clone https://github.com/HebiRobotics/hebi_cpp_api_ros_examples
 git clone https://github.com/HebiRobotics/hebi_rosie_ros_demo
+cd hebi_rosie_ros_demo
+git checkout iamtesch/diff-drive-ROSie
+cd ..
 ```
 
 ### (6) Build
