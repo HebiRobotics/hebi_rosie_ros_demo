@@ -75,7 +75,7 @@ public:
 
   bool canReach(const Location& location) {
     bool can_reach = 
-      location.x > 0.25 && location.x < 0.5 &&
+      location.x > 0.15 && location.x < 0.6 &&
       location.y > -0.2 && location.y < 0.2 &&
       location.z > -0.11 && location.z < -0.09;
     if (can_reach)
@@ -212,11 +212,11 @@ private:
   }
 
   void setGoalDrop() {
-    setGoalLocation({-0.1, -0.2, 0.3}, true);
+    setGoalLocation({0.1, -0.17, 0.3}, true);
   }
 
   void setGoalBox() {
-    setGoalLocation({-0.1, -0.17, -0.04}, true);
+    setGoalLocation({0.1, -0.17, -0.04}, true);
   }
 
   void setColor(const Color& c) {
@@ -463,7 +463,7 @@ public:
       // The points they should match up with:
       Eigen::MatrixXd world_pts(3, 30);
       double spacing = 0.075; // mm between row centers
-      double top_row = 0.15 + 0.54; // 15 cm from center to front of robot, 54 cm to top row on paper.
+      double top_row = 0.15 + 0.54; // 15 cm from center of arm to front of robot, 54 cm to top row on paper.
       double right_col = -2.5 * spacing; // 2.5 rows to the right
       for (int row = 0; row < 5; ++row) {
         for (int col = 0; col < 6; ++col) {
@@ -522,7 +522,8 @@ Base::Location transformToBase(const Vision::Location& source)
   double x = source.x;
   double y = source.y;
   calibrate_trans.transform(x, y);
-  return Base::Location{x, y};
+  // The base axis for the wheels is 7.5 cm behind the arm base (and vision coordinate system)
+  return Base::Location{x - 0.075, y};
 }
 
 // Direct (non-ROS) connection to the iPad.
