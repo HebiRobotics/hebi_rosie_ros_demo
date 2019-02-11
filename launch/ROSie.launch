@@ -11,7 +11,7 @@
 
     <node ns="rosie/base" pkg="hebi_cpp_api_examples" type="diff_drive_node" name="diff_drive_node"/>
 
-    <node ns="rosie/arm" pkg="hebi_cpp_api_examples" type="arm_node_action" name="arm_node_action"/>
+    <node ns="rosie/arm" pkg="hebi_cpp_api_examples" type="arm_node" name="arm_node"/>
 
     <node pkg="hebi_rosie_demo" type="gripper_node" name="gripper_node" /> 
 
