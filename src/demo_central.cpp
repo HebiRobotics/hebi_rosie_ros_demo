@@ -204,7 +204,7 @@ private:
   }
 
   void setGoalHome() {
-    setGoalLocation({0.2, -0.2, 0.3}, true);
+    setGoalLocation({0.2, 0.2, 0.3}, true);
   }
 
   void setGoalThrow() {
