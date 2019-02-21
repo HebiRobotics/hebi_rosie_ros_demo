@@ -8,7 +8,7 @@ See [Install Instructions](INSTALL.md)
 
 # Compiling
 
-After installing the necessary Intel Realsense drivers and ROS packages, compile via `catkin_make example_nodes_generate_messages` and then `catkin_make` in your ROS workspace (~/rosie_workspace if you have followed the installation instructions above).
+After installing the necessary Intel Realsense drivers and ROS packages, compile via `catkin_make hebi_cpp_api_examples_generate_messages` and then `catkin_make` in your ROS workspace (~/rosie_workspace if you have followed the installation instructions above).
 
 # Color calibration for object detection
 
@@ -17,7 +17,7 @@ After installing the necessary Intel Realsense drivers and ROS packages, compile
 You may need to tune the RGB or HSV values in order to pick up colored objects in the particular lighting conditions you run this demo in.  To do so, we have included a ROS node and launch file that allows you to drag sliders to adjust these values.  Note that you currently need to change the source to adjust to GUI to show the effect of different RGB value thresholds.
 
 To run the GUI, run:
-`roslaunch example_nodes VisionThreshold.launch`
+`roslaunch hebi_rosie_demo VisionThreshold.launch`
 
 If the realsense cannot be found, then <ctrl-C>, unplug and replug the realsense, and relaunch the program.  This will be indicated by a red text error message in the terminal.
 
@@ -31,7 +31,7 @@ First, move the robot arm out of the image view area.  Then tune the min/max rgb
 
 The cleaner and more robust the segmentation is, the better results you will have with the demonstration.
 
-Once you have ranges for each of these parameters, press "Ctrl-P" (or press the "brush" icon at the top) to open a small panel.  Press the "export" button so pring these values to the screen so you can add them to the color definitions, and then "ctrl-C" in the terminal to quit the thresholding GUI. Change or add the color structure for your identified object in the `src/example_nodes/src/Rosie_Demo/parameters/colors.txt` file (these parameters are loaded into the ROS parameter server when the ROSie.launch file is used).
+Once you have ranges for each of these parameters, press "Ctrl-P" (or press the "brush" icon at the top) to open a small panel.  Press the "export" button so pring these values to the screen so you can add them to the color definitions, and then "ctrl-C" in the terminal to quit the thresholding GUI. Change or add the color structure for your identified object in the `parameters/colors.txt` file (these parameters are loaded into the ROS parameter server when the ROSie.launch file is used).
 
 The "rosie/enabled_colors" variable in this file determines which color definitions will be used when running the demo; for RGB color definitions define the (r/g/b)min/max variables, and for HSV color definitions, define the (h/s/v)min/max variables.
 
@@ -45,9 +45,9 @@ Before running, ensure that the all modules in the arm (Base, shoulder, elbow, a
 
 When you start the program, the robot will move into a "home" position with the end effector in front of the robot, and if the modules are not near zero, a large motion could cause the robot arm to collide with the mast holding the realsense up.
 
-To begin the program, launch ROSie.launch from the example_nodes package.  Note: you must be in the catkin workspace you set up for this to work (e.g., the `~/rosie_workspace` directory):
+To begin the program, launch ROSie.launch from the hebi_rosie_demo package.  Note: you must be in the catkin workspace you set up for this to work (e.g., the `~/rosie_workspace` directory):
 
-```roslaunch example_nodes ROSie.launch```
+```roslaunch hebi_rosie_demo ROSie.launch```
 
 After starting the program, the robot should move to its base position.  At this time, ensure there is no red text on the screen (this indicates a problem with one of the nodes -- either the gripper, base, or arm modules cannot be found, or the computer cannot connect to the realsense).  If the modules cannot be found, <ctrl-C>, then check the connections between modules and try to restart the program.  If the realsense cannot be found, then <ctrl-C>, unplug and replug the realsense, and relaunch the program.  Note that there are a lot of information messages, and so the error message may get lost in the output quickly.  Scroll up and look for any red text.
   
@@ -104,7 +104,7 @@ _If the calibration fails_, press "B1" to "pause" the control again, then press 
 
 If the captured image does not show up, trying 3-4 more times will usually work to help visualize the image.
 
-**Important: Note that this calibration only applies for the current run of the robot; to set this as the default starting camera calibration, write these values in the `example_nodes/src/Rosie_demo/parameters/calibration.txt` file.**
+**Important: Note that this calibration only applies for the current run of the robot; to set this as the default starting camera calibration, write these values in the `parameters/calibration.txt` file.**
 
 The values that you need to use for this will be output to the screen in yellow text
 
