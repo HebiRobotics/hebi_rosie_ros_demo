@@ -1,4 +1,4 @@
-rosie/enabled_colors: [ "rgb_yellow", "rgb_red" ]
+rosie/enabled_colors: [ "office_hsv_blue", "office_hsv_red" ]
 
 rosie/rgb_yellow: {
     rmin: 186, rmax: 255, 
@@ -28,3 +28,16 @@ rosie/hsv_red: {
     rdisp: 255, gdisp: 0, bdisp: 0,
     priority: 1
   }
+
+rosie/office_hsv_blue: {
+    hmin: 100, hmax: 234,
+    smin: 240, smax: 255,
+    vmin: 99, vmax: 110,
+    priority: 0
+}
+rosie/office_hsv_red: {
+    hmin: 104, hmax: 177,
+    smin: 107, smax: 195,
+    vmin: 150, vmax: 173,
+    priority: 1
+}

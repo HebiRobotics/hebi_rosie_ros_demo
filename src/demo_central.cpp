@@ -463,7 +463,7 @@ public:
       // The points they should match up with:
       Eigen::MatrixXd world_pts(3, 30);
       double spacing = 0.075; // mm between row centers
-      double top_row = 0.15 + 0.54; // 15 cm from center of arm to front of robot, 54 cm to top row on paper.
+      double top_row = 0.15 + 0.56; // 15 cm from center of arm to front of robot + 54cm (Letter) / 56cm (A4) to top row on paper.
       double right_col = -2.5 * spacing; // 2.5 rows to the right
       for (int row = 0; row < 5; ++row) {
         for (int col = 0; col < 6; ++col) {
