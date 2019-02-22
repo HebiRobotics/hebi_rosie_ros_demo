@@ -76,7 +76,7 @@ public:
   bool canReach(const Location& location) {
     bool can_reach = 
       location.x > 0.15 && location.x < 0.6 &&
-      location.y > -0.2 && location.y < 0.2 &&
+      location.y > -0.25 && location.y < 0.25 &&
       location.z > -0.11 && location.z < -0.09;
     if (can_reach)
       ROS_INFO("Can reach %f %f %f", location.x, location.y, location.z);
@@ -212,11 +212,11 @@ private:
   }
 
   void setGoalDrop() {
-    setGoalLocation({0.1, -0.17, 0.3}, true);
+    setGoalLocation({-0.09, -0.18, 0.3}, true);
   }
 
   void setGoalBox() {
-    setGoalLocation({0.1, -0.17, -0.04}, true);
+    setGoalLocation({-0.09, -0.18, -0.04}, true);
   }
 
   void setColor(const Color& c) {
@@ -514,7 +514,8 @@ Arm::Location transformToArm(const Vision::Location& source)
   double x = source.x;
   double y = source.y;
   calibrate_trans.transform(x, y);
-  return Arm::Location{x, y, -0.1};
+  double yMountingOffset = -0.045; // robot is mounted 4.5cm towards right of center (negative y)
+  return Arm::Location{x, y - yMountingOffset, -0.1};
 }
 
 Base::Location transformToBase(const Vision::Location& source)
@@ -522,7 +523,7 @@ Base::Location transformToBase(const Vision::Location& source)
   double x = source.x;
   double y = source.y;
   calibrate_trans.transform(x, y);
-  // The base axis for the wheels is 7.5 cm behind the arm base (and vision coordinate system)
+  // The base axis for the wheels is 7.5 cm in front of the arm base (and vision coordinate system)
   return Base::Location{x - 0.075, y};
 }
 
