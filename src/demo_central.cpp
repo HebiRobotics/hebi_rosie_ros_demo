@@ -75,14 +75,15 @@ public:
 
   bool canReach(const Location& location) {
     bool can_reach = 
-      location.x > 0.15 && location.x < 0.6 &&
-      location.y > -0.25 && location.y < 0.25 &&
+      location.x > 0.25 && location.x < 0.45 &&
+      location.y > -0.20 && location.y < 0.20 &&
       location.z > -0.11 && location.z < -0.09;
     if (can_reach)
       ROS_INFO("Can reach %f %f %f", location.x, location.y, location.z);
     else
       ROS_INFO("Cannot reach %f %f %f", location.x, location.y, location.z);
-    return can_reach;
+//    return can_reach;
+    return false;
   }
 
   bool moveHome() {
@@ -212,11 +213,13 @@ private:
   }
 
   void setGoalDrop() {
-    setGoalLocation({-0.09, -0.18, 0.3}, true);
+//    setGoalLocation({-0.09, -0.18, 0.3}, true);
+    setGoalLocation({+0.35, +0.35, 0.3}, true);
   }
 
   void setGoalBox() {
-    setGoalLocation({-0.09, -0.18, -0.04}, true);
+//    setGoalLocation({-0.09, -0.18, -0.04}, true);
+    setGoalLocation({+0.35, +0.35, +0.04}, true);
   }
 
   void setColor(const Color& c) {
@@ -524,7 +527,7 @@ Base::Location transformToBase(const Vision::Location& source)
   double y = source.y;
   calibrate_trans.transform(x, y);
   // The base axis for the wheels is 7.5 cm in front of the arm base (and vision coordinate system)
-  return Base::Location{x - 0.075, y};
+  return Base::Location{x - 0.45, y};
 }
 
 // Direct (non-ROS) connection to the iPad.

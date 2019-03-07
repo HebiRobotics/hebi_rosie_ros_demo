@@ -5,15 +5,15 @@
     <rosparam command="load" file="$(find hebi_rosie_demo)/parameters/colors.txt"/>
     <rosparam command="load" file="$(find hebi_rosie_demo)/parameters/calibration.txt"/>
 
-    <include file="$(find realsense2_camera)/launch/rs_camera.launch" /> 
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch" />
 
     <node pkg="hebi_rosie_demo" type="vision_process" name="vision_process" />
 
-    <node ns="rosie/base" pkg="hebi_cpp_api_examples" type="diff_drive_node" name="diff_drive_node"/>
+    <node ns="rosie/base" pkg="hebi_cpp_api_examples" type="diff_drive_node" name="diff_drive_node" output="screen"/>
 
     <node ns="rosie/arm" pkg="hebi_cpp_api_examples" type="arm_node" name="arm_node"/>
 
-    <node pkg="hebi_rosie_demo" type="gripper_node" name="gripper_node" /> 
+    <node pkg="hebi_rosie_demo" type="gripper_node" name="gripper_node" />
 
     <node pkg="hebi_rosie_demo" type="demo_central" name="demo_central" output="screen" required="true"/>
 
