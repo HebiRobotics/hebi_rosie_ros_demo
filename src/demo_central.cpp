@@ -87,6 +87,7 @@ public:
   }
 
   bool moveHome() {
+    setGoalIntermediate();
     setGoalHome();
     if (!moveToGoal())
       return false;
@@ -96,6 +97,7 @@ public:
     setColor(color);
     // Call service to move to pick up location, facing down:
     clearLocations();
+    setGoalIntermediate();
     setGoalLocation(location, true);
     if (!moveToGoal()) {
       clearColor();
@@ -111,7 +113,7 @@ public:
     // TODO: smooth these motions into a single action! Need additional functionality from RosieArmNode...
     // Call service to move home and then move to drop position
     clearLocations();
-    setGoalHome();
+    setGoalIntermediate();
     setGoalDrop();
     if (!moveToGoal()) {
       clearColor();
@@ -125,6 +127,7 @@ public:
 
     // Call service to move home
     clearLocations();
+    setGoalIntermediate();
     setGoalHome();
     if (!moveToGoal()) {
       clearColor();
@@ -137,6 +140,7 @@ public:
   bool deployBags() {
     clearColor();
     clearLocations();
+    setGoalIntermediate();
     setGoalDrop();
     setGoalBox();
     if (!moveToGoal())
@@ -148,6 +152,7 @@ public:
 
     clearLocations();
     setGoalDrop();
+    setGoalIntermediate();
     setGoalThrow();
     if (!moveToGoal())
       return false;
@@ -220,6 +225,10 @@ private:
   void setGoalBox() {
 //    setGoalLocation({-0.09, -0.18, -0.04}, true);
     setGoalLocation({+0.35, +0.35, +0.04}, true);
+  }
+
+  void setGoalIntermediate() {
+    setGoalLocation({0.35, 0.0, 0.3}, true);
   }
 
   void setColor(const Color& c) {
