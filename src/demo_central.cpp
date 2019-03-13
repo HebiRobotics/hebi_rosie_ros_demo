@@ -82,8 +82,8 @@ public:
       ROS_INFO("Can reach %f %f %f", location.x, location.y, location.z);
     else
       ROS_INFO("Cannot reach %f %f %f", location.x, location.y, location.z);
-//    return can_reach;
-    return false;
+    return can_reach;
+//    return false;
   }
 
   bool moveHome() {
@@ -219,16 +219,18 @@ private:
 
   void setGoalDrop() {
 //    setGoalLocation({-0.09, -0.18, 0.3}, true);
-    setGoalLocation({+0.35, +0.35, 0.3}, true);
+//    setGoalLocation({+0.35, +0.35, 0.3}, true);
+    setGoalLocation({-0.02, +0.2, 0.3}, true);
   }
 
   void setGoalBox() {
 //    setGoalLocation({-0.09, -0.18, -0.04}, true);
-    setGoalLocation({+0.35, +0.35, +0.04}, true);
+//    setGoalLocation({+0.35, +0.35, +0.04}, true);
+    setGoalLocation({-0.02, +0.2, 0.1}, true);
   }
 
   void setGoalIntermediate() {
-    setGoalLocation({0.35, 0.0, 0.3}, true);
+    setGoalLocation({0.35, +0.1, 0.3}, true);
   }
 
   void setColor(const Color& c) {
@@ -306,7 +308,7 @@ public:
     // Logic here to not just run over the friggin' thing
     base_motion_goal_.theta = atan2(location.y, location.x);
     double len = std::sqrt(location.x * location.x + location.y * location.y);
-    double actual_len = len - 0.45; // stay .45 m away from the robot center.
+    double actual_len = len - 0.275; // stay [m] away from the robot center.
 //    if (actual_len < 0)
 //      actual_len = 0;
     double frac = actual_len / len;
@@ -536,7 +538,7 @@ Base::Location transformToBase(const Vision::Location& source)
   double y = source.y;
   calibrate_trans.transform(x, y);
   // The base axis for the wheels is 7.5 cm in front of the arm base (and vision coordinate system)
-  return Base::Location{x - 0.45, y};
+  return Base::Location{x - 0.075, y};
 }
 
 // Direct (non-ROS) connection to the iPad.
