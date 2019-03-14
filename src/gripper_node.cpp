@@ -15,9 +15,9 @@
 
 #include <hebi_rosie_demo/GripperSrv.h>
 
-#include "hebi.h"
-#include "lookup.hpp"
-#include "group_command.hpp"
+#include "hebi_cpp_api/hebi.h"
+#include "hebi_cpp_api/lookup.hpp"
+#include "hebi_cpp_api/group_command.hpp"
 
 using namespace hebi;
 using namespace hebi_rosie_demo;
