@@ -15,9 +15,9 @@
 #include "Eigen/Core"
 #include <Eigen/SVD>
 
-#include "group.hpp"
-#include "group_feedback.hpp"
-#include "lookup.hpp"
+#include "hebi_cpp_api/group.hpp"
+#include "hebi_cpp_api/group_feedback.hpp"
+#include "hebi_cpp_api/lookup.hpp"
 
 
 // We abstract the behavior of each of the core components up here, so our
