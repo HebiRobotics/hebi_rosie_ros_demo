@@ -630,7 +630,6 @@ int main(int argc, char ** argv) {
 
   // Initialize abstracted components and their ROS interfaces
   auto ipad = IPad::create("HEBI", "Mobile IO"); // This blocks forever...
-  Arm arm(node);
   Base base(node);
   Vision vision(node);
   Vision::Location location;
@@ -643,6 +642,7 @@ int main(int argc, char ** argv) {
     if (state.to_mode == IPad::Mode::Pause)
       break;
   }
+  Arm arm(node);
   arm.moveHome();
 
   // TODO: load calibration!
