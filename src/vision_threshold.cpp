@@ -65,8 +65,8 @@ int main(int argc, char ** argv) {
   ros::Subscriber image_subscriber = node.subscribe("/camera/color/image_raw", 60, image_callback);
       
   cv::namedWindow(OPENCV_WINDOW);
-  cvCreateButton("Use HSV", callbackButton, nullptr, CV_CHECKBOX, 0);
-  cvCreateButton("Export ROS Parameter", exportParameters, nullptr, CV_PUSH_BUTTON, 0);
+  cv::createButton("Use HSV", callbackButton, nullptr, CV_CHECKBOX, 0);
+  cv::createButton("Export ROS Parameter", exportParameters, nullptr, CV_PUSH_BUTTON, 0);
 //  cvCreateLabel("Red");
   cvCreateTrackbar("Low R/H", OPENCV_WINDOW.c_str(), &lowR, 255); // Red / Hue
   cvCreateTrackbar("High R/H", OPENCV_WINDOW.c_str(), &highR, 255); // Red / Hue
