@@ -88,10 +88,6 @@ add_executable(demo_central src/demo_central.cpp)
 add_dependencies(demo_central ${catkin_EXPORTED_TARGETS})
 target_link_libraries(demo_central ${catkin_LIBRARIES})
 
-add_executable(gripper_node src/gripper_node.cpp)
-add_dependencies(gripper_node ${catkin_EXPORTED_TARGETS})
-target_link_libraries(gripper_node ${catkin_LIBRARIES})
-
 add_executable(vision_process src/vision_process.cpp)
 add_dependencies(vision_process ${catkin_EXPORTED_TARGETS})
 target_link_libraries(vision_process ${catkin_LIBRARIES} ${OpenCV_LIBS})

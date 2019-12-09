@@ -33,7 +33,7 @@ struct Color {
 class Gripper {
 public:
   Gripper(ros::NodeHandle& node)
-    : client_(node.serviceClient<hebi_rosie_demo::GripperSrv>("rosie/gripper")) {
+    : client_(node.serviceClient<hebi_rosie_demo::GripperSrv>("rosie/gripper/close")) {
   }
 
   bool close() {
@@ -94,7 +94,7 @@ public:
   bool pickup(const Location& location, const Color& color) {
     setColor(color);
     // Call service to move to pick up location, facing down:
-    clearLocations();
+    ROS_INFO("Goal: Bag");
     setGoalLocation(location, true);
     if (!moveToGoal()) {
       clearColor();
@@ -109,7 +109,6 @@ public:
 
     // TODO: smooth these motions into a single action! Need additional functionality from RosieArmNode...
     // Call service to move home and then move to drop position
-    clearLocations();
     setGoalHome();
     setGoalDrop();
     if (!moveToGoal()) {
@@ -123,7 +122,6 @@ public:
     }
 
     // Call service to move home
-    clearLocations();
     setGoalHome();
     if (!moveToGoal()) {
       clearColor();
@@ -135,7 +133,6 @@ public:
 
   bool deployBags() {
     clearColor();
-    clearLocations();
     setGoalDrop();
     setGoalBox();
     if (!moveToGoal())
@@ -145,7 +142,6 @@ public:
     if (!gripper_.close())
       return false;
 
-    clearLocations();
     setGoalDrop();
     setGoalThrow();
     if (!moveToGoal())
@@ -154,6 +150,7 @@ public:
     if (!gripper_.open())
       return false;
 
+    moveHome();
     return true;
     
   }
@@ -170,11 +167,13 @@ private:
 
     if (!finished_before_timeout) {
       ROS_ERROR("Arm motion action timed out");
+      clearLocations();
       return false;
     }
 
     auto res = arm_motion_.getState();
     ROS_INFO("Arm motion action finished: %s", res.toString().c_str());
+    clearLocations();
     return true;
   }
 
@@ -204,19 +203,29 @@ private:
   }
 
   void setGoalHome() {
+    ROS_INFO("Goal: Home");
     setGoalLocation({0.2, -0.2, 0.3}, true);
   }
 
   void setGoalThrow() {
+    ROS_INFO("Goal: Throw");
     setGoalLocation({0.3, -0.3, 0.3}, true);
   }
 
   void setGoalDrop() {
+    //setGoalLocation({-0.125, -0.225, 0.3}, true);
+    ROS_INFO("Goal: Drop");
     setGoalLocation({-0.1, -0.2, 0.3}, true);
   }
 
   void setGoalBox() {
+    ROS_INFO("Goal: Box");
     setGoalLocation({-0.1, -0.17, -0.04}, true);
+  }
+
+  void setGoalIntermediate() {
+    ROS_INFO("Goal: Intermediate");
+    setGoalLocation({0.1, -0.3, 0.3}, true);
   }
 
   void setColor(const Color& c) {
@@ -613,7 +622,7 @@ int main(int argc, char ** argv) {
   constexpr double rotate_increment = M_PI / 3.0; // 1/6 of a full rotation
 
   // Initialize abstracted components and their ROS interfaces
-  auto ipad = IPad::create("HEBI", "Mobile IO"); // This blocks forever...
+  auto ipad = IPad::create("Rosie", "Mobile IO"); // This blocks forever...
   Arm arm(node);
   Base base(node);
   Vision vision(node);
@@ -659,8 +668,12 @@ int main(int argc, char ** argv) {
 
       // Can the arm reach this? If so, retrieve, then continue the search
       auto arm_location = transformToArm(location);
+      ROS_INFO_STREAM("NEW TARGET AT: " << arm_location.x << " | " << arm_location.y << " | " << arm_location.z);
       if (arm.canReach(arm_location)) {
-        arm.pickup(arm_location, color);
+        bool pick_success = arm.pickup(arm_location, color);
+        if(!pick_success) {
+          ROS_ERROR("ARM FAILED PICKUP");
+        }
         continue;
       }
       if (state.to_mode == IPad::Mode::Pause)
